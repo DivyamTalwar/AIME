@@ -6,7 +6,7 @@ anthropic==0.18.1
 google-generativeai==0.3.2
 tenacity==8.2.3
 python-dotenv==1.0.0
-torch==2.1.0+cpu
-torchvision==0.16.0+cpu
-torchaudio==2.1.0+cpu
+torch==2.1.0
+torchvision==0.16.0
+torchaudio==2.1.0
 transformers==4.36.0

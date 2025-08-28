@@ -652,9 +652,7 @@ async def aime_demo():
         print(f"AIME: {response}\n")
         
         metrics = aime_engine.get_intelligence_metrics()
-        print(f"Neural Metrics: Nodes: {metrics['total_nodes']} | Connections: {metrics['neural_connections']} | Intelligence: {metrics['network_intelligence']:.2f}\n")
-        print("-" * 60 + "\n")
-        
+        print(f"Neural Metrics: Nodes: {metrics['total_nodes']} | Connections: {metrics['neural_connections']} | Intelligence: {metrics['network_intelligence']:.2f}\n")        
         await asyncio.sleep(1)
     
     print("AIME Neural Network Analysis\n")

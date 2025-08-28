@@ -18,6 +18,8 @@ import openai
 import anthropic
 import google.generativeai as genai
 from tenacity import retry, stop_after_attempt, wait_exponential
+from dotenv import load_dotenv
+load_dotenv()
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("AIME")
@@ -122,7 +124,7 @@ class AnthropicLLM(BaseLLM):
 
 
 class GeminiLLM(BaseLLM):
-    def __init__(self, api_key: str, model: str = "gemini-1.5-flash"):
+    def __init__(self, api_key: str, model: str = "gemini-2.5-flash"):
         genai.configure(api_key=api_key)
         self.model = genai.GenerativeModel(model)
     
@@ -152,7 +154,7 @@ def create_llm(provider: LLMProvider, api_key: str, model: Optional[str] = None)
     elif provider == LLMProvider.ANTHROPIC:
         return AnthropicLLM(api_key, model or "claude-3-5-sonnet-20241022")
     elif provider == LLMProvider.GEMINI:
-        return GeminiLLM(api_key, model or "gemini-1.5-flash")
+        return GeminiLLM(api_key, model or "gemini-2.5-flash")
     else:
         raise ValueError(f"Unsupported provider: {provider}")
 
@@ -621,9 +623,6 @@ Respond intelligently using relevant memories when appropriate."""
 
 
 async def aime_demo():
-    from dotenv import load_dotenv
-    load_dotenv()
-    
     aime_engine = AIME(
         llm_provider=LLMProvider.OPENAI,
         llm_api_key=os.getenv("OPENAI_API_KEY"),
@@ -645,11 +644,6 @@ async def aime_demo():
         "What if memories could form their own connections autonomously?",
         "Tell me about the AI system we're building - how does it learn?"
     ]
-    
-    print("╔══════════════════════════════════════════════════════════╗")
-    print("║     AIME — Agentic Intelligent Memory Engine Demo       ║")
-    print("╚══════════════════════════════════════════════════════════╝\n")
-    
     for i, message in enumerate(conversations, 1):
         print(f"Session {i}:")
         print(f"Human: {message}")
@@ -663,7 +657,7 @@ async def aime_demo():
         
         await asyncio.sleep(1)
     
-    print("=== AIME Neural Network Analysis ===\n")
+    print("AIME Neural Network Analysis\n")
     
     test_queries = [
         "How does the AI system evolve?",
@@ -680,7 +674,7 @@ async def aime_demo():
         print()
     
     topology = aime_engine.get_neural_topology()
-    print(f"\n=== AIME Neural Topology ===")
+    print(f"\nAIME Neural Topology")
     print(f"Total neural nodes: {len(topology)}")
     print(f"Interconnected nodes: {sum(1 for links in topology.values() if links)}")
     

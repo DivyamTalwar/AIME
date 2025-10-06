@@ -1,6 +1,6 @@
 numpy
 sentence-transformers
-pinecone-client
+pinecone
 openai
 anthropic
 google-generativeai

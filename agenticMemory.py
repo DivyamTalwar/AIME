@@ -39,7 +39,7 @@ class AIMEMemoryNode:
     keywords: List[str] = field(default_factory=list)
     tags: List[str] = field(default_factory=list)
     context: str = ""
-    embedding: Optional[np.ndarray] = None
+    embedding: Optional[np.ndarray] = field(default=None, compare=False)
     links: Set[str] = field(default_factory=set)
     metadata: Dict[str, Any] = field(default_factory=dict)
     evolution_count: int = 0
